@@ -7,7 +7,7 @@ AUTH = "bfa2d58a73b19954934dbd5038ff7230"
 
 
 def send_text(encoded_string, filename = "test" ,recip='+447758928837'):
-
+	'''  sends json literal over sms with encoded string base64 with optional filename '''
 
 	client = Client(ACCOUNT_SID,AUTH)
 	message = client.messages.create(
@@ -19,6 +19,7 @@ def send_text(encoded_string, filename = "test" ,recip='+447758928837'):
 	return message.sid
 
 def get_64image(filename):
+	''' returns a base64 encoded file with of teh given filename '''
 	with open(filename,"rb") as f:
 		file = f.read()
 		return b64encode(file).decode("UTF-8")
