@@ -4,6 +4,10 @@ import requests
 
 app = Flask(__name__)
 
+@app.route("/",methods=["get"])
+def index():
+	return "I am alive"
+
 @app.route("/sms", methods=['GET', 'POST'])
 def sms_reply():
     """Respond to incoming calls with a simple text message."""
