@@ -13,10 +13,21 @@ def index():
 def sms_reply():
     """Respond to incoming calls with a simple text message."""
     # Start our TwiML response
+
     resp = MessagingResponse()
 
-    # Add a message
-    resp.message("The Robots are coming! Head for the hills!")
+    #there was no message body
+    if not arg:
+    	resp.message("The Robots are coming! Head for the hills!")
+		return str(resp)	  
+	
+	extern_resp = request.get(arg)
+
+	#we couldnt get the resource
+	if extern_resp.status_code != 200:
+		resp.message("Couldnt get resource soz")
+
+	resp.message(extern_resp.text)
 
     return str(resp)
 
