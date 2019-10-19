@@ -14,13 +14,13 @@ def sms_reply():
     """Respond to incoming calls with a simple text message."""
     #Start our TwiML response
     resp = MessagingResponse()
-    arg = requests.values.get("Body",None)
+    arg = request.values.get("Body",None)
 
     #there was no message body
     if not arg:
     	resp.message("The Robots are coming! Head for the hills!")
     	return str(resp)
-    extern_resp = request.get(arg)
+    extern_resp = requests.get(arg)
     #we couldnt get the resource
     if extern_resp.status_code != 200:
         resp.message("Couldnt get resource soz")
