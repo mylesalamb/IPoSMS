@@ -1,6 +1,8 @@
 from flask import Flask, request, redirect
 from twilio.twiml.messaging_response import MessagingResponse
 from urllib import urlparse
+import json
+
 
 import requests
 
@@ -10,26 +12,30 @@ app = Flask(__name__)
 def index():
 	return "I am alive"
 
+
+
 @app.route("/sms", methods=['GET', 'POST'])
 def sms_reply():
-    """Respond to incoming calls with a simple text message."""
+    """Respond to incoming json formatted texts, requesting resources
+        {
+            "type" : ... , 
+            "resource" : ...,
+        }
+
+    """
     #Start our TwiML response
     resp = MessagingResponse()
     arg = request.values.get("Body",None)
 
-    # url format
-    url = urlparse(arg)
+    arg = json.loads(arg)
 
-    # if not valid url
-    if url.scheme == '':
-        resp.message("Invalid url format!")
+    #check if the text recieved was good
+    if not arg or "type" not in arg:
+        resp.message("Invalid message body")
         return str(resp)
 
-    #there was no message body so send something silly
-    if not arg:
-    	resp.message("The Robots are coming! Head for the hills!")
-    	return str(resp)
-    extern_resp = requests.get(arg)
+    if arg["type"] == "get":
+        extern_resp = requests.get(arg["resource"])
     
     #we couldnt get the resource
     if extern_resp.status_code != 200:
