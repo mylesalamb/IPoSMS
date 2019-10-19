@@ -1,0 +1,4 @@
+{
+  "builds": [{ "src": "index.py", "use": "@now/python" }]
+}
+
