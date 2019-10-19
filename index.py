@@ -1,6 +1,5 @@
 from flask import Flask, request, redirect
 from twilio.twiml.messaging_response import MessagingResponse
-from urllib import urlparse
 import json
 
 
@@ -35,7 +34,7 @@ def sms_reply():
         return str(resp)
 
     if arg["type"] == "get":
-        extern_resp = requests.get(arg["resource"])
+        extern_resp = requests.get(arg["resource"]) 
     
     #we couldnt get the resource
     if extern_resp.status_code != 200:
