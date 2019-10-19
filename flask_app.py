@@ -16,7 +16,7 @@ def sms_reply():
     resp = MessagingResponse()
     arg = request.values.get("Body",None)
 
-    #there was no message body
+    #there was no message body so send something silly
     if not arg:
     	resp.message("The Robots are coming! Head for the hills!")
     	return str(resp)
