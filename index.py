@@ -1,46 +1,33 @@
 from flask import Flask, request, redirect
 from twilio.twiml.messaging_response import MessagingResponse
 import json
-
-
+import zlib
 import requests
+import base64
 
 app = Flask(__name__)
 
-@app.route("/",methods=["get"])
-def index():
-	return "I am alive"
-
-
-
 @app.route("/sms", methods=['GET', 'POST'])
 def sms_reply():
-    """Respond to incoming json formatted texts, requesting resources
-        {
-            "type" : ... , 
-            "resource" : ...,
-        }
-
+    """Respond to incoming http requests, proxying them through
     """
     #Start our TwiML response
     resp = MessagingResponse()
-    arg = request.values.get("Body",None)
+    body = request.values.get("Body", None)
 
-    arg = json.loads(arg)
+    r = requests.get(body)
 
-    #check if the text recieved was good
-    if not arg or "type" not in arg:
-        resp.message("Invalid message body")
-        return str(resp)
+    # Compress the result
+    processed = bytearray(r.text, 'utf-8')
+    processed = zlib.compress(processed)
+    processed = base64.b64encode(processed)
 
-    if arg["type"] == "get":
-        extern_resp = requests.get(arg["resource"]) 
-    
-    #we couldnt get the resource
-    if extern_resp.status_code != 200:
-        resp.message("Couldnt get resource soz")
-    resp.message(extern_resp.text)
+    n = 1000 # Chunk the string into groups of 1000 characters to stay well below the 1600 character limit
+    parts = [processed[i:i+n] for i in range(0, len(processed), n)]
+    for chunk in parts:
+        resp.message(str(chunk)[2:-1])
+    resp.message('=====') # This is a good way to declare the end
     return str(resp)
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=False)
