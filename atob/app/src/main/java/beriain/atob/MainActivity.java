@@ -43,7 +43,7 @@ import org.jsoup.nodes.Document;
 public class MainActivity extends AppCompatActivity {
 
   private SmsBroadcastReceiver smsBroadcastReceiver;
-  public static final String MOBILE_NUMBER = "+447449453958";
+  public static final String MOBILE_NUMBER = "+447723490252";
 
   SharedPreferences preferences;
   String home =
