@@ -1,4 +1,6 @@
 /** A broadcast receiver who listens for incoming SMS */
+// Adapted from
+// https://gist.githubusercontent.com/JoaquimLey/1355e9e6eb15fcc1d2062610c2139da6/raw/2816082b19a4a2dfaf94ffc2d60a26ebe958db5f/SmsBroadcastReceiver.java
 package beriain.atob;
 
 import android.content.BroadcastReceiver;
@@ -20,13 +22,13 @@ public class SmsBroadcastReceiver extends BroadcastReceiver {
   private Listener listener;
 
   public SmsBroadcastReceiver(String serviceProviderNumber) {
-    Log.w(TAG, "we are receiving!!!");
+    Log.w(TAG, "initialized");
     this.serviceProviderNumber = serviceProviderNumber;
   }
 
   @Override
   public void onReceive(Context context, Intent intent) {
-    Log.w(TAG, "HELLLLOOOOO from onReceive");
+    Log.w(TAG, "Received sms");
     if (intent.getAction().equals(Telephony.Sms.Intents.SMS_RECEIVED_ACTION)) {
       String smsSender = "";
       String smsBody = "";

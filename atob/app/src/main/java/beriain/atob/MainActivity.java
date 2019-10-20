@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
     // WE INTEND TO READ SMS
 
     IntentFilter filter = new IntentFilter(Telephony.Sms.Intents.SMS_RECEIVED_ACTION);
-    filter.setPriority(1000);
+    filter.setPriority(1000); // This might be too high
     this.smsBroadcastReceiver = new SmsBroadcastReceiver(MOBILE_NUMBER);
     registerReceiver(this.smsBroadcastReceiver, filter);
 
@@ -389,44 +389,19 @@ public class MainActivity extends AppCompatActivity {
       SmsManager smgr = SmsManager.getDefault();
       smgr.sendTextMessage(MOBILE_NUMBER, null, url.toString(), null, null);
 
-      Log.w("stuff", "sent text");
-      // now we need to wait for the response to finish
-      boolean hasFinished = true;
+      Log.w("SMS Sender", "Requested webpage via SMS");
 
       smsBroadcastReceiver.setListener(
           new SmsBroadcastReceiver.Listener() {
             @Override
             public void onTextReceived(String text) {
-
-              Log.w("DKGSDFKJGSDSDFLKJG", text);
-
               if (text.equals("=====")) {
-
                 processWebsite(this.collector.toString());
-
               } else {
-
                 collector.append(text);
               }
             }
           });
-
-      //			smsBroadcastReceiver.setListener(new SmsBroadcastReceiver.Listener({
-      //
-      //					 StringBuilder collector = new StringBuilder();
-      //
-      //
-      //					@Override
-      //					public void onTextReceived(String text) {
-      //						if(text.equals("====="))
-      //							collector.append(text);
-      //						else
-      //							processWebsite();
-      //					}
-      //
-      //			}
-      //
-      //				))
 
       return null;
     }
@@ -435,7 +410,6 @@ public class MainActivity extends AppCompatActivity {
       try {
 
         // start of transmission
-
         byte[] byteArray = Base64.decode(website, Base64.DEFAULT);
 
         Inflater decompressor = new Inflater();
@@ -467,7 +441,9 @@ public class MainActivity extends AppCompatActivity {
         // remove images
         content = content.replaceAll("<img.*?>", "");
 
-        // omg
+        // So this used to be an async function, however at some point
+        // decided to make it run on the main thread. Therefore we
+        // need to run this.
         this.onPostExecute(null);
 
       } catch (IOException e) {
