@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name" translatable="false">atob</string>
+    <string name="action_settings">Settings</string>
+    <string name="input_title">Enter URL or search term...</string>
+    <string name="action_go">Go</string>
+    <string name="action_cancel">Cancel</string>
+    <string name="title_activity_settings">Settings</string>
+    <string name="loading">Loading…</string>
+    <string name="page_size">This page size</string>
+    <string name="pref_header_general">General</string>
+    <string name="pref_title_theme">Theme</string>
+    <string name="about">About</string>
+    <string name="pref_header_browser">Browser</string>
+    <string name="pref_title_search">Search engine</string>
+</resources>

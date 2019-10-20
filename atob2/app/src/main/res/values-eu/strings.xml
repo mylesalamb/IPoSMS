@@ -1,0 +1,22 @@
+<resources>
+    <string name="action_settings">Ezarpenak</string>
+    <string name="input_title">Idatzi URLa edo bilatzeko hitza...</string>
+    <string name="action_go">Joan</string>
+    <string name="action_cancel">Utzi</string>
+    <string name="loading">Kargatzen…</string>
+    <string name="page_size">Orrialde honen neurria</string>
+    <string name="pref_header_general">Orokorra</string>
+    <string-array name="pref_example_list_titles">
+        <item>Argia</item>
+        <item>Iluna</item>
+    </string-array>
+    <string-array name="pref_example_list_values">
+        <item>1</item>
+        <item>0</item>
+    </string-array>
+    <string name="pref_header_browser">Nabigatzailea</string>
+    <string name="pref_title_search">Bilaketa motorra</string>
+    <string name="about">Honi buruz</string>
+    <string name="title_activity_settings">Ezarpenak</string>
+    <string name="pref_title_theme">Gaia</string>
+</resources>

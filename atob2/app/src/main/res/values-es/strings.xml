@@ -1,0 +1,22 @@
+<resources>
+    <string name="action_settings">Ajustes</string>
+    <string name="input_title">Escribe URL o palabra para buscar...</string>
+    <string name="action_go">Ir</string>
+    <string name="action_cancel">Cancelar</string>
+    <string name="loading">Cargando…</string>
+    <string name="page_size">Tamaño de esta página</string>
+    <string name="pref_header_general">General</string>
+    <string-array name="pref_example_list_titles">
+        <item>Claro</item>
+        <item>Oscuro</item>
+    </string-array>
+    <string-array name="pref_example_list_values">
+        <item>1</item>
+        <item>0</item>
+    </string-array>
+    <string name="pref_header_browser">Navegador</string>
+    <string name="pref_title_search">Motor de búsqueda</string>
+    <string name="about">Acerca de</string>
+    <string name="title_activity_settings">Ajustes</string>
+    <string name="pref_title_theme">Tema</string>
+</resources>
